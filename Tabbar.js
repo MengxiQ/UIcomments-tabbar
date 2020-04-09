@@ -21,24 +21,30 @@ export class Tabbar{
     this.config = config;
   }
   init(){
-    //是否启用tabb_line
-    if (this.config.tabbr_line == true)
-    {
-      //添加tabbr_line dom元素
-      let tabbr_line_txt = '<div class="tabbar_line"></div>';
-      this.dom_tabbar.appendChild(this.parseDom(tabbr_line_txt));
-      this.dom_tabbar_line = document.querySelector('.tabbar_line');
-      //
-      this.setLineWidth();
+    if (this.dom_tabbar != null){
+      //是否启用tabb_line
+      if (this.config.tabbr_line === true)
+      {
+        //添加tabbr_line dom元素
+        // console.log(this.dom_tabbar);
+        let tabbr_line_txt = '<div class="tabbar_line"></div>';
+        this.dom_tabbar.appendChild(this.parseDom(tabbr_line_txt));
+        this.dom_tabbar_line = document.querySelector('.tabbar_line');
+        //
+        this.setLineWidth();
 
-    }
-    //是否启用hover_line
-    if (this.config.hover_line == true){
-      this.hoverOption();
+      }
+      //是否启用hover_line
+      if (this.config.hover_line === true){
+        this.hoverOption();
+      }
+
+      this.setCurrentAcitve();
+      this.setClick();
+    }else {
+      console.log('你选择的dom不存在！');
     }
 
-    this.setCurrentAcitve();
-    this.setClick();
 
 
   }
@@ -61,7 +67,7 @@ export class Tabbar{
   setCurrentAcitve(){
     this.dom_tabbar_options[this.current_active].classList.add('option_active');
     //移动tabbar_line
-    if (this.config.tabbr_line == true) {
+    if (this.config.tabbr_line === true) {
       this.movLine();
       this.dom_tabbar_line.style.left = this.current_line_postion;
     }
